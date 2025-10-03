@@ -1,6 +1,17 @@
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: papayawhip;
+}
+.content{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .header{
-    padding-top: 0.5em;
-    padding-bottom: 0.5em;
+    padding: 0.5em 1em;
     border: 1px solid black;
     background-color: gainsboro;
     box-shadow: 0px 0px 14px 0px black;
@@ -13,6 +24,17 @@
     gap: 10px;
     display: flex;
     list-style: none;
+    align-items: center;
+}
+
+.nav-img{
+    margin-left: auto;
+}
+
+.nav-img img{
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
 }
 
 .nav li a{
@@ -21,23 +43,37 @@
     text-decoration: none;
     font-size: 17px;
     color: black;
-    
+
 }
 
 .nav li a:hover{
     background-color: antiquewhite;
 }
 
-.forms{
-    background-color: #fff;
-    border-radius: 15px;
+#login {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+}
+
+header{
+    width: 95%;
+    border-radius: 0.5em;
+    margin: 0.5em;
+}
+
+#login .forms{
+    margin-top: 5em;
+    background-color: gainsboro;
+    border-radius: 1em;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
     padding: 10px 20px;
     transition: transform 0.2s;
-    width: 500px;
+    width: 20em;
     text-align: center;
 }
-.forms label{
+#login .forms label{
     display: block;
     width: 100%;
     margin-top: 10px;
@@ -45,4 +81,24 @@
     text-align: left;
     color: #555;
     font-weight: bold;
+}
+
+#login input{
+    width: 50%;
+    margin-bottom: 15px;
+    padding: 10px;
+    box-sizing: border-box;
+    border: 1px solid #ddd;
+}
+
+#login button{
+    padding: 10px;
+    margin-top: 1px;
+    margin-bottom: 15px;
+    border: none;
+    color: white;
+    cursor: pointer;
+    background-color: blue;
+    width: 20%;
+    font-size: 15px;
 }

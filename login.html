@@ -6,22 +6,30 @@
     <link rel="stylesheet" href="res/index.css">
 </head>
 
-<body>
+<body id="login">
     <header class ="header">
         <ul class="nav">
             <li><a href="index.html">Home</a></li>
             <li><a href="addPost.html">Add Post</a></li>
-            <li><a href="login.html">Login</a></li>
+            <li class="nav-img">
+                <a href="index.html">
+                    <img src="res/images/me.png"></img>
+                </a>
+            </li>
         </ul>
     </header>
 
     <form class="forms" action="">
-        <label for="email">Username:</label>
-        <input type="text" id="email" name="email"
+        <p><Strong>Welcome to PostIt</Strong></p>
+        <a href="#" style="text-decoration: none;">Create an account</a>
+        <p>or</p>
+        <p>Please log in</p>
+        <label for="email"></label>
+        <input type="email" id="email" name="email"
             placeholder="Email" required>
 
-        <label for="password">Password:</label>
-        <input type="text" id="password" name="password"
+        <label for="password"></label>
+        <input type="password" id="password" name="password"
             placeholder="Password" required>
 
         <div class="wrap">
@@ -29,9 +37,8 @@
                 Log in
             </button>
         </div>
+        <a href="#" style="text-decoration: none;">Forget password</a>
     </form>
-    <a href="#">Forget password</a>
-
 
 </body>
 </html>
