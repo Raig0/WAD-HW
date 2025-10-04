@@ -1,23 +1,33 @@
 <html lang="en">
     <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="res/index.css">
-</head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="res/index.css" />
+    </head>
 
-<body id="addpost">
-    <header class ="header">
+    <body id="addpost">
+        <header class ="header">
         <ul class="nav">
             <li><a href="index.html">Home</a></li>
-            <li><a href="addPost.html">Add Post</a></li>
             <li class="nav-img">
                 <a href="login.html">
                     <img src="res/images/me.png"></img>
                 </a>
             </li>
         </ul>
-        
     </header>
-</body>
+
+        <form class="form" action="">
+                <div class="formpostbody" >
+                    <p>Post body</p>
+                    <textarea name="" id="postbody" placeholder="textarea"></textarea>
+                </div>
+                    <div class="formpostbody" >
+                    <p>Select file</p>
+                    <a type="file" id="choosefile">Choose file</a>
+                </div>
+            <button id="createpost" type="submit">Create post</button>
+        </form>
+    </body>
 </html>
