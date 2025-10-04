@@ -1,4 +1,7 @@
 body{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     font-family: Arial, Helvetica, sans-serif;
     margin: 0;
     padding: 0;
@@ -8,6 +11,12 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+header{
+    width: 95%;
+    border-radius: 0.5em;
+    margin: 0.5em auto;
 }
 
 .header{
@@ -29,6 +38,8 @@ body{
 
 .nav-img{
     margin-left: auto;
+    padding: 0;
+    border-radius: 0;
 }
 
 .nav-img img{
@@ -50,17 +61,9 @@ body{
     background-color: antiquewhite;
 }
 
-#login {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    min-height: 100vh;
-}
-
-header{
-    width: 95%;
-    border-radius: 0.5em;
-    margin: 0.5em;
+.nav li.nav-img a:hover,
+.nav-img a:hover {
+    background-color: transparent;
 }
 
 #login .forms{
