@@ -5,7 +5,7 @@ body{
     font-family: Arial, Helvetica, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: papayawhip;
+    background-color: #555;
 }
 
 .content {
@@ -15,12 +15,13 @@ body{
 }
 
 .header {
-    width: 95%;
+    width: 90%;
     padding: 0.5em 1em;
     border: 1px solid black;
     background-color: gainsboro;
     box-shadow: 0px 0px 14px 0px black;
     border-radius: 5px;
+    margin-top: 0.5em;
 }
 
 .nav {
@@ -53,7 +54,7 @@ body{
 }
 
 .nav li a:hover {
-    background-color: antiquewhite;
+    background-color: white;
 }
 
 .nav li.nav-img a:hover,
@@ -89,17 +90,19 @@ body{
     border: 1px solid #ddd;
 }
 
-#login button {
+#login .wrap button {
     padding: 10px;
     margin-top: 1px;
-    margin-bottom: 15px;
+    margin-bottom: 2em;
     border: none;
     color: white;
     cursor: pointer;
     background-color: blue;
     width: 20%;
     font-size: 15px;
+    text-decoration: none;
 }
+
 #addpost {
     display: flex;
     flex-direction: column;
@@ -145,9 +148,10 @@ body{
     font-size: 1em;
     width: 8em;
     height: 2em;
+    display: flex;
+    text-decoration: none;
 }
 #addpost #choosefile {
-    display: flex;
     background-color: gray;
 }
 #addpost #createpost {
