@@ -1,16 +1,16 @@
-body{
+body {
     font-family: Arial, Helvetica, sans-serif;
     margin: 0;
     padding: 0;
     background-color: papayawhip;
 }
-.content{
+.content {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.header{
+.header {
     padding: 0.5em 1em;
     border: 1px solid black;
     background-color: gainsboro;
@@ -27,26 +27,25 @@ body{
     align-items: center;
 }
 
-.nav-img{
+.nav-img {
     margin-left: auto;
 }
 
-.nav-img img{
+.nav-img img {
     width: 40px;
     height: 40px;
     cursor: pointer;
 }
 
-.nav li a{
+.nav li a {
     padding: 10px 20px;
     border-radius: 30px;
     text-decoration: none;
     font-size: 17px;
     color: black;
-
 }
 
-.nav li a:hover{
+.nav li a:hover {
     background-color: antiquewhite;
 }
 
@@ -57,13 +56,13 @@ body{
     min-height: 100vh;
 }
 
-header{
+header {
     width: 95%;
     border-radius: 0.5em;
     margin: 0.5em;
 }
 
-#login .forms{
+#login .forms {
     margin-top: 5em;
     background-color: gainsboro;
     border-radius: 1em;
@@ -73,7 +72,7 @@ header{
     width: 20em;
     text-align: center;
 }
-#login .forms label{
+#login .forms label {
     display: block;
     width: 100%;
     margin-top: 10px;
@@ -83,7 +82,7 @@ header{
     font-weight: bold;
 }
 
-#login input{
+#login input {
     width: 50%;
     margin-bottom: 15px;
     padding: 10px;
@@ -91,7 +90,7 @@ header{
     border: 1px solid #ddd;
 }
 
-#login button{
+#login button {
     padding: 10px;
     margin-top: 1px;
     margin-bottom: 15px;
@@ -101,4 +100,54 @@ header{
     background-color: blue;
     width: 20%;
     font-size: 15px;
+}
+#addpost {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+}
+
+#addpost .form {
+    margin-top: 5em;
+    background-color: gainsboro;
+    border-radius: 1em;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    padding: 10px 20px;
+    transition: transform 0.2s;
+    width: 20em;
+    text-align: center;
+}
+#addpost .form > div {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    justify-content: space-evenly;
+    margin-bottom: 1em;
+}
+#addpost .form #postbody {
+    width: 24em;
+    min-width: 24em;
+    max-width: 24em;
+    height: 10em;
+    min-height: 10em;
+}
+#addpost #createpost,
+#choosefile {
+    justify-content: center;
+    align-items: center;
+    border: none;
+    color: white;
+    cursor: pointer;
+    background-color: blue;
+    font-size: 1em;
+    width: 8em;
+    height: 2em;
+}
+#addpost #choosefile {
+    display: flex;
+    background-color: gray;
+}
+#addpost #createpost {
+    background-color: blue;
 }
