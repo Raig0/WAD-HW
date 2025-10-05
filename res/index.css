@@ -157,3 +157,52 @@ body{
 #addpost #createpost {
     background-color: blue;
 }
+
+#index .content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1em;
+  margin-top: 2em;
+  width: 100%;
+}
+
+#index .post {
+  background-color: gainsboro;
+  border-radius: 1em;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+  padding: 1em 2em;
+  width: 60%;
+}
+
+.post-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+}
+
+#index .post:hover {
+  background-color: #d6d4d4db;
+  transition: 0.2s;
+}
+
+.user-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.author {
+  color: blue;
+  font-weight: bold;
+}
+
+.post-img {
+  width: 100%;
+  border-radius: 10px;
+  margin: 10px 0;
+}
+
+@media (max-width: 800px) {
+  #index .post { width: 90%; }
+}
