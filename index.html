@@ -1,23 +1,70 @@
 <html lang="en">
-    <head>
+  <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="res/index.css">
-</head>
+    <title>PostIt — Home</title>
+  </head>
 
-<body id="index">
-    <header class ="header">
-        <ul class="nav">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="addPost.html">Add Post</a></li>
-            <li class="nav-img">
-                <a href="login.html">
-                    <img src="res/images/me.png"></img>
-                </a>
-            </li>
-        </ul>
-        
+  <body id="index">
+    <header class="header">
+      <ul class="nav">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="addPost.html">Add Post</a></li>
+        <li class="nav-img">
+          <a href="login.html">
+            <img src="res/images/me.png" alt="Profile picture" />
+          </a>
+        </li>
+      </ul>
     </header>
-</body>
+
+    <main class="content">
+      <article class="post">
+        <div class="post-header">
+          <img src="res/images/me.png" alt="User icon" class="user-icon">
+          <p class="meta"><time datetime="2025-10-05">Oct 5, 2025</time> · by <span class="author">Kenert</span></p>
+        </div>
+        <p>Working hard on our first group assignment this week!</p>
+      </article>
+
+      <article class="post">
+        <div class="post-header">
+          <img src="res/images/me.png" alt="User icon" class="user-icon">
+          <p class="meta"><time datetime="2025-10-04">Oct 4, 2025</time> · by <span class="author">Kenert</span></p>
+        </div>
+        <p>Does anyone remember where today's programming lab takes place?</p>
+      </article>
+
+      <article class="post">
+        <div class="post-header">
+          <img src="res/images/me.png" alt="User icon" class="user-icon">
+          <p class="meta"><time datetime="2025-10-03">Oct 3, 2025</time> · by <span class="author">Kenert</span></p>
+        </div>
+        <p>Decided to walk this morning to first lecture!</p>
+      </article>
+
+      <article class="post">
+        <div class="post-header">
+          <img src="res/images/me.png" alt="User icon" class="user-icon">
+          <p class="meta"><time datetime="2025-10-02">Oct 2, 2025</time> · by <span class="author">Kenert</span></p>
+        </div>
+        <img src="res/images/coffee.png" alt="Coffee break" class="post-img">
+        <p>Sometimes a good coffee is all you need to survive the day.</p>
+      </article>
+
+      <article class="post">
+        <div class="post-header">
+          <img src="res/images/me.png" alt="User icon" class="user-icon">
+          <p class="meta"><time datetime="2025-10-01">Oct 1, 2025</time> · by <span class="author">Kenert</span></p>
+        </div>
+        <p>Thinking about going hiking in South Estonia this weekend!</p>
+      </article>
+    </main>
+
+    <footer class="footer">
+      <p>© 2025 PostIt — WAD Homeworks</p>
+    </footer>
+  </body>
 </html>
