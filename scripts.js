@@ -5,7 +5,10 @@
 
 fetch("posts.json")
     .then(response => response.json())
-    .then(posts => displayPosts(posts))
+    .then(posts => {
+        posts.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+        displayPosts(posts);
+    })
     .catch(error => console.error("Error loading posts:", error));
 
 function displayPosts(posts) {
