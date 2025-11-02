@@ -51,7 +51,7 @@
         "id": 7,
         "created_at": "2025-10-07T16:40",
         "author": "Kenert",
-        "content": "Library was full today, had to study in the hallway 😅",
+        "content": "Library was full today, had to study in the hallway",
         "image": null,
         "avatar": "res/images/me.png"
     },
@@ -67,7 +67,7 @@
         "id": 9,
         "created_at": "2025-10-31T19:25",
         "author": "Kenert",
-        "content": "Friday evening = coffee and VS Code ☕💻",
+        "content": "Friday evening = coffee and VS Code",
         "image": null,
         "avatar": "res/images/me.png"
     },
