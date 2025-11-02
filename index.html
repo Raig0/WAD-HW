@@ -1,30 +1,41 @@
 <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="res/index.css">
-    <title>PostIt — Home</title>
-  </head>
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="res/index.css" />
+        <title>PostIt — Home</title>
+    </head>
 
-  <body id="index">
-    <header class="header">
-      <ul class="nav">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="addPost.html">Add Post</a></li>
-        <li class="nav-img">
-          <a href="login.html">
-            <img src="res/images/me.png" alt="Profile picture" />
-          </a>
-        </li>
-      </ul>
-    </header>
+    <body id="index">
+        <header class="header">
+            <ul class="nav">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="addPost.html">Add Post</a></li>
 
-    <main class="content"></main>
+                <li class="nav-img">
+                    <a onclick="toggleMenu()">
+                        <img src="res/images/me.png" alt="Profile picture" />
+                    </a>
+                </li>
 
-    <footer class="footer">
-      <p>© 2025 PostIt — WAD Homeworks</p>
-    </footer>
-    <script src="scripts.js"></script>
-  </body>
+                <div class="dropdown-wrap" id="dropDown">
+                    <div class="dropdown">
+                        <h4>Raigo Lehement</h4>
+                        <hr />
+                        <h4>raigo.lehement@mail.ee</h4>
+                        <hr />
+                        <h4>logout</h4>
+                    </div>
+                </div>
+            </ul>
+        </header>
+
+        <main class="content"></main>
+
+        <footer class="footer">
+            <p>© 2025 PostIt — WAD Homeworks</p>
+        </footer>
+        <script src="scripts.js"></script>
+    </body>
 </html>

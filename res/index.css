@@ -1,4 +1,4 @@
-body{
+body {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -37,6 +37,34 @@ body{
     margin-left: auto;
     padding: 0;
     border-radius: 0;
+}
+.dropdown-wrap {
+    position: absolute;
+    top: 10%;
+    right: 5%;
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 0.3s ease-in-out;
+}
+.dropdown-wrap.open-menu {
+    max-height: 400px;
+}
+
+.dropdown {
+    background-color: #ccc;
+    padding: 1rem;
+    align-items: center;
+    border-radius: 8px;
+}
+
+.dropdown h4 {
+    font-weight: normal;
+}
+
+.dropdown hr {
+    margin: 0.5rem 0;
+    border: none;
+    border-top: 1px solid #999;
 }
 
 .nav-img img {
@@ -159,58 +187,60 @@ body{
 }
 
 #index .content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1em;
-  margin-top: 2em;
-  width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1em;
+    margin-top: 2em;
+    width: 100%;
 }
 
 #index .post {
-  background-color: gainsboro;
-  border-radius: 1em;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
-  padding: 1em 2em;
-  width: 60%;
+    background-color: gainsboro;
+    border-radius: 1em;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    padding: 1em 2em;
+    width: 60%;
 }
 
 .post-header {
-  display: flex;
-  align-items: center;
-  gap: 0.5em;
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
 }
 
 #index .post:hover {
-  background-color: #d6d4d4db;
-  transition: 0.2s;
+    background-color: #d6d4d4db;
+    transition: 0.2s;
 }
 
 .user-icon {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
 }
 
 .author {
-  color: blue;
-  font-weight: bold;
+    color: blue;
+    font-weight: bold;
 }
 
 .post-img {
-  width: 100%;
-  border-radius: 10px;
-  margin: 10px 0;
+    width: 100%;
+    border-radius: 10px;
+    margin: 10px 0;
 }
 
 @media (max-width: 800px) {
-  #index .post { width: 90%; }
+    #index .post {
+        width: 90%;
+    }
 }
 
 .post + .post {
-  margin-top: 1em;
+    margin-top: 1em;
 }
 
 .post ~ .footer {
-  margin-top: 2em;
+    margin-top: 2em;
 }
