@@ -5,7 +5,7 @@ body {
     font-family: Arial, Helvetica, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #555;
+    background-color: rgba(235, 234, 245, 1);
 }
 
 .content {
@@ -15,17 +15,12 @@ body {
 }
 
 .header {
-    width: 90%;
-    padding: 0.5em 1em;
-    border: 1px solid black;
-    background-color: gainsboro;
-    box-shadow: 0px 0px 14px 0px black;
-    border-radius: 5px;
-    margin-top: 0.5em;
+    width: 100%;
+    background-color: rgba(246, 244, 251, 1);
 }
 
 .nav {
-    padding: 10px 20px;
+    padding: 1rem 8rem;
     margin: 0;
     gap: 10px;
     display: flex;
@@ -36,22 +31,26 @@ body {
 .nav-img {
     margin-left: auto;
     padding: 0;
-    border-radius: 0;
+    border-radius: 50%;
+}
+.nav-img img {
+    border-radius: 50%;
 }
 .dropdown-wrap {
     position: absolute;
-    top: 10%;
+    top: 7%;
     right: 5%;
     overflow: hidden;
     max-height: 0;
     transition: max-height 0.3s ease-in-out;
+    z-index: 10;
 }
 .dropdown-wrap.open-menu {
     max-height: 400px;
 }
 
 .dropdown {
-    background-color: #ccc;
+    background-color: #ffffff;
     padding: 1rem;
     align-items: center;
     border-radius: 8px;
@@ -64,7 +63,12 @@ body {
 .dropdown hr {
     margin: 0.5rem 0;
     border: none;
-    border-top: 1px solid #999;
+    border-top: 1px solid #e5e7eb;
+}
+
+.dropdown #logout {
+    color: red;
+    cursor: pointer;
 }
 
 .nav-img img {
@@ -82,7 +86,7 @@ body {
 }
 
 .nav li a:hover {
-    background-color: white;
+    background-color: #ffffff;
 }
 
 .nav li.nav-img a:hover,
@@ -140,9 +144,8 @@ body {
 
 #addpost .form {
     margin-top: 5em;
-    background-color: gainsboro;
-    border-radius: 1em;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    background-color: #ffffff;
+    border-radius: 1rem;
     padding: 10px 20px;
     transition: transform 0.2s;
     width: 25em;
@@ -172,7 +175,6 @@ body {
     border: none;
     color: white;
     cursor: pointer;
-    background-color: blue;
     font-size: 1em;
     width: 8em;
     height: 2em;
@@ -180,10 +182,18 @@ body {
     text-decoration: none;
 }
 #addpost #choosefile {
-    background-color: gray;
+    background-color: #94a3b8;
 }
 #addpost #createpost {
-    background-color: blue;
+    cursor: pointer;
+    background-color: #6366f1;
+}
+#addpost #choosefile:hover {
+    background-color: #7e8ba3; /* hover efekt */
+}
+
+#addpost #createpost:hover {
+    background-color: #4f46e5; /* hover efekt */
 }
 
 #index .content {
@@ -196,11 +206,11 @@ body {
 }
 
 #index .post {
-    background-color: gainsboro;
+    background-color: rgba(246, 244, 251, 1);
     border-radius: 1em;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
     padding: 1em 2em;
     width: 60%;
+    transition: 0.3s ease-in-out;
 }
 
 .post-header {
@@ -210,8 +220,8 @@ body {
 }
 
 #index .post:hover {
-    background-color: #d6d4d4db;
-    transition: 0.2s;
+    transform: scale(1.02);
+    transition: 0.5s ease-in-out;
 }
 
 .user-icon {
@@ -221,7 +231,7 @@ body {
 }
 
 .author {
-    color: blue;
+    color: #6366f1;
     font-weight: bold;
 }
 
