@@ -16,8 +16,7 @@ body {
 
 .header {
     width: 100%;
-    padding: 0.5rem 1rem;
-    background-color: rgba(235, 234, 245, 1);
+    background-color: rgba(246, 244, 251, 1);
 }
 
 .nav {
@@ -39,7 +38,7 @@ body {
 }
 .dropdown-wrap {
     position: absolute;
-    top: 8%;
+    top: 7%;
     right: 5%;
     overflow: hidden;
     max-height: 0;
