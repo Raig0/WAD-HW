@@ -1,56 +1,62 @@
 <template>
-    <main class="content">
-        <PostComponent
-            v-for="post in posts"
-            :key="post.id"
-            :post="post"
-            class="post"></PostComponent>
-    </main>
+  <main class="content">
+    <button class="reset-btn" @click="resetAllLikes">
+      Reset all likes
+    </button>
+
+    <PostComponent
+      v-for="post in orderedPosts"
+      :key="post.id"
+      :post="post"
+      class="post"
+    />
+  </main>
 </template>
 
 <script>
 import PostComponent from "../components/PostComponent.vue";
 
 export default {
-    name: "PostsView",
-    components: { PostComponent },
-    data() {
-        return { posts: [] };
+  name: "PostsView",
+  components: { PostComponent },
+
+  computed: {
+    // võtame postid Vuex store'ist
+    posts() {
+      return this.$store.getters.getPosts;
     },
-    async created() {
-        try {
-            const res = await fetch("/posts.json");
-            if (!res.ok) throw new Error("Network response was not ok");
-            const postsData = await res.json();
-            this.posts = postsData
-                .slice()
-                .sort(
-                    (a, b) => new Date(b.created_at) - new Date(a.created_at)
-                );
-        } catch (err) {
-            console.error("Error loading posts:", err);
-        }
+
+    orderedPosts() {
+      return [...this.posts].sort(
+        (a, b) => new Date(b.created_at) - new Date(a.created_at)
+      );
     },
-    methods: {
-        formatDate(iso) {
-            return new Date(iso).toLocaleDateString("en-US", {
-                month: "short",
-                day: "numeric",
-                year: "numeric",
-                hour: "2-digit",
-                minute: "2-digit",
-            });
-        },
+  },
+
+  methods: {
+    resetAllLikes() {
+      this.$store.commit("resetAllLikes");
     },
+  },
 };
 </script>
 
 <style scoped>
 .content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 2em;
-    gap: 2em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2em;
+  gap: 2em;
+}
+
+.reset-btn {
+  align-self: flex-end;
+  margin-bottom: 1rem;
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
 }
 </style>
