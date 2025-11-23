@@ -20,8 +20,13 @@ export default {
   name: "PostsView",
   components: { PostComponent },
 
+  async created() {
+    if (!this.$store.state.posts.length) {
+      await this.$store.dispatch("fetchPosts");
+    }
+  },
+
   computed: {
-    // võtame postid Vuex store'ist
     posts() {
       return this.$store.getters.getPosts;
     },
