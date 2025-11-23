@@ -18,6 +18,10 @@
         </div>
             <img class="post-img":src="post.image" alt="Post image" v-if="post.image" />
             <p>{{ post.content }}</p>
+
+            <button class="like-btn" @click="likePost(post.id)">
+                {{ post.likes }} likes
+            </button>
         </div>
         
 </template>
@@ -27,6 +31,11 @@ export default {
     name: "PostComponent",
     props: {
         post: Object,
+    },
+    methods: {
+        likePost(id) {
+            this.$store.commit('incrementLikes', id);
+        },
     },
 };
 
@@ -71,6 +80,22 @@ export default {
     width: 100%;
     border-radius: 10px;
     margin: 10px 0;
+}
+
+.like-btn {
+    margin-top: 1em;
+    padding: 0.5em 1em;
+    background-color: #6366f1;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.2s;
+}
+
+.like-btn:hover {
+    background-color: #4f46e5;
 }
 
 @media (max-width: 800px) {

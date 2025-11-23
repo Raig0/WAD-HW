@@ -8,14 +8,28 @@ export default createStore({
         setPosts(state, posts) {
             state.posts = posts;
         },
+
+        incrementLikes(state, postId) {
+            const post = state.posts.find(p => p.id === postId);
+            if (post) {
+                post.likes++;
+            }
+        },
     },
+
     actions: {
         async fetchPosts({ commit }) {
             const res = await fetch("/posts.json");
             const posts = await res.json();
+
+            const postsWithLikes = posts.map(post => ({
+                ...post,
+                likes: post.likes ?? 0
+            }));
+
             commit(
                 "setPosts",
-                posts
+                postsWithLikes
                     .slice()
                     .sort(
                         (a, b) =>
