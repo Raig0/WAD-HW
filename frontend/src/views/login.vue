@@ -1,74 +1,172 @@
 <template>
     <div id="login">
-        <form class="forms" action="index.html">
-            <p><strong>Welcome to PostIt</strong></p>
-            <a href="#" style="text-decoration: none">Create an account</a>
-            <p>or</p>
-            <p>Please log in</p>
-            <label for="email"></label>
-            <input
-                type="email"
-                id="email"
-                name="email"
-                placeholder="Email"
-                required />
+        <form class="forms" @submit.prevent="validateForm">
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input
+                    type="email"
+                    id="email"
+                    ref="email"
+                    placeholder="Email"
+                    required />
+            </div>
 
-            <label for="password"></label>
-            <input
-                type="password"
-                id="password"
-                name="password"
-                placeholder="Password"
-                required />
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input
+                    type="password"
+                    id="password"
+                    ref="password"
+                    placeholder="Password"
+                    required />
+            </div>
+
+            <div v-if="errors.length" class="error">
+                <ul>
+                    <li v-for="(error, index) in errors" :key="index">{{ error }}</li>
+                </ul>
+            </div>
 
             <div class="wrap">
-                <button type="submit">Log in</button>
+                <button type="submit">Signup</button>
             </div>
-            <a href="#" style="text-decoration: none">Forgot password</a>
         </form>
     </div>
 </template>
 
+<script>
+export default {
+    name: 'Signup',
+    data() {
+        return {
+            errors: []
+        };
+    },
+    methods: {
+        checkPassword(password) {
+            this.errors = [];
+
+            if (password.length < 8 || password.length > 14) {
+                this.errors.push("Password must be 8-14 characters long.");
+            }
+            if (!/[A-Z]/.test(password)) {
+                this.errors.push("Password must contain at least one uppercase alphabet character.");
+            }
+            if ((password.match(/[a-z]/g) || []).length < 2) {
+                this.errors.push("Password must contain at least two lowercase alphabet characters.");
+            }
+            if (!/[0-9]/.test(password)) {
+                this.errors.push("Password must contain at least one numeric value.");
+            }
+            if (!/^[A-Z]/.test(password)) {
+                this.errors.push("Password must start with an uppercase letter.");
+            }
+            if (!/_/.test(password)) {
+                this.errors.push("Password must contain character _");
+            }
+        },
+        validateForm() {
+            // read password from input element
+            const password = this.$refs.password && this.$refs.password.value;
+            this.checkPassword(password);
+            if (this.errors.length === 0) {
+                
+                if (this.$refs.password) this.$refs.password.value = '';
+                if (this.$refs.email) this.$refs.email.value = '';
+                
+                this.$router.push('/');
+            }
+        }
+    }
+};
+</script>
+
 <style scoped>
+
+.error {
+    color: red;
+    margin-top: 1em;
+}
+
+#login {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+}
 
 #login .forms {
     margin-top: 5em;
-    background-color: gainsboro;
+    background-color: rgb(235, 233, 233);
     border-radius: 1em;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
-    padding: 10px 20px;
+    padding: 20px;
     transition: transform 0.2s;
-    width: 20em;
-    text-align: center;
+    width: 25em;
 }
+
+.form-group {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 1em;
+    padding: 0.5em 0;
+}
+
 #login .forms label {
     display: block;
-    width: 100%;
-    margin-top: 10px;
-    margin-bottom: 5px;
-    text-align: left;
+    width: 30%;
+    margin: 0;
+    text-align: right;
     color: #555;
     font-weight: bold;
 }
 
 #login input {
-    width: 50%;
-    margin-bottom: 15px;
+    width: 65%;
+    margin-bottom: 0;
     padding: 10px;
     box-sizing: border-box;
     border: 1px solid #ddd;
+    text-align: center;
+}
+
+#login .wrap {
+    display: flex;
+    justify-content: center;
 }
 
 #login .wrap button {
     padding: 10px;
-    margin-top: 1px;
+    margin-top: 1em;
     margin-bottom: 2em;
     border: none;
+    border-radius: 1em;
     color: white;
     cursor: pointer;
     background-color: blue;
-    width: 20%;
+    width: 30%;
     font-size: 15px;
-    text-decoration: none;
+}
+
+@media (max-width: 480px) {
+    #login .forms {
+        width: 90%;
+        padding: 16px;
+    }
+    .form-group {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    #login .forms label {
+        width: 100%;
+        margin-bottom: 6px;
+    }
+    #login input {
+        width: 100%;
+    }
+    #login .wrap button {
+        width: 40%;
+    }
 }
 </style>
