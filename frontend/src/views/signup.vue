@@ -28,10 +28,7 @@
             </div>
 
             <div class="wrap">
-                <button type="submit">Login</button>
-                <button type="button" class="secondary" @click="goToSignup">
-                    Signup
-                </button>
+                <button type="submit">Signup</button>
             </div>
         </form>
     </div>
@@ -39,7 +36,7 @@
 
 <script>
 export default {
-    name: 'Login',
+    name: 'Signup',
     data() {
         return {
             email: '',
@@ -48,20 +45,37 @@ export default {
         };
     },
     methods: {
-        validateForm() {
+        checkPassword(password) {
             this.errors = [];
 
-            if(!this.email || !this.password) {
-                this.errors.push("Email and password are required.");
-                return;
+            if (password.length < 8 || password.length > 14) {
+                this.errors.push("Password must be 8-14 characters long.");
             }
-
-            this.email = '';
-            this.password = '';
-            this.$router.push('/');
+            if (!/[A-Z]/.test(password)) {
+                this.errors.push("Password must contain at least one uppercase alphabet character.");
+            }
+            if ((password.match(/[a-z]/g) || []).length < 2) {
+                this.errors.push("Password must contain at least two lowercase alphabet characters.");
+            }
+            if (!/[0-9]/.test(password)) {
+                this.errors.push("Password must contain at least one numeric value.");
+            }
+            if (!/^[A-Z]/.test(password)) {
+                this.errors.push("Password must start with an uppercase letter.");
+            }
+            if (!/_/.test(password)) {
+                this.errors.push("Password must contain character _");
+            }
         },
-        goToSignup() {
-            this.$router.push('/signup');
+        validateForm() {
+            
+            this.checkPassword(this.password);
+
+            if (this.errors.length === 0) {
+                this.email = '';
+                this.password = '';
+                this.$router.push('/');
+            }
         }
     }
 };
@@ -133,16 +147,6 @@ export default {
     background-color: blue;
     width: 30%;
     font-size: 15px;
-}
-
-#login .wrap {
-    display: flex;
-    justify-content: center;
-    gap: 1em;
-}
-
-#login .wrap .secondary {
-    background-color: blue;
 }
 
 @media (max-width: 480px) {

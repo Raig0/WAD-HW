@@ -2,7 +2,7 @@
     <header class="header">
         <ul class="nav">
             <li><RouterLink to="/">Home</RouterLink></li>
-            <li><RouterLink to="/login">Signup</RouterLink></li>
+            <li><RouterLink to="/login">Login</RouterLink></li>
 
             <li class="nav-img">
                 <a @click="toggleMenu">
