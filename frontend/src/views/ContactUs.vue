@@ -40,6 +40,9 @@ export default {
     max-width: 800px;
     margin: 0 auto;
     padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 h1 {
@@ -52,10 +55,9 @@ h1 {
     gap: 1rem;
     margin-bottom: 2rem;
 }
-@media (max-width: 600px) {
+@media (max-width: 1024px) {
     .team {
         flex-direction: column;
-        align-items: center;
     }
 }
 
