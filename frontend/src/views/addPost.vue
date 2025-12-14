@@ -42,6 +42,10 @@ export default {
                 this.router.push("/");
             } catch (err) {
                 console.error(err);
+                if (err.response && (err.response.status === 401 || err.response.status === 403)) {
+                    this.router.push('/login');
+                    return;
+                }
                 alert("Error creating post");
             }
         },

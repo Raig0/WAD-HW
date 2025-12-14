@@ -1,11 +1,32 @@
+require("dotenv").config();
 const express = require("express");
 const pool = require("./db");
 const app = express();
 const cors = require("cors");
+const jwt = require("jsonwebtoken");
+
 app.use(cors());
 app.use(express.json());
 
-app.get("/posts", async (req, res) => {
+const JWT_SECRET = process.env.JWT_SECRET || "secretkey";
+
+function generateAccessToken(payload) {
+    return jwt.sign(payload, JWT_SECRET, { expiresIn: "1h" });
+}
+
+function authenticateToken(req, res, next) {
+    const authHeader = req.headers["authorization"];
+    const token = authHeader && authHeader.split(" ")[1];
+    if (!token) return res.status(401).json({ message: "Token missing" });
+
+    jwt.verify(token, JWT_SECRET, (err, user) => {
+        if (err) return res.status(403).json({ message: "Invalid token" });
+        req.user = user;
+        next();
+    });
+}
+
+app.get("/posts", authenticateToken, async (req, res) => {
     try {
         const posts = await pool.query("SELECT * FROM posts");
         res.json(posts.rows);
@@ -14,7 +35,7 @@ app.get("/posts", async (req, res) => {
     }
 });
 // updateb postitust
-app.put("/posts/:id", async (req, res) => {
+app.put("/posts/:id", authenticateToken, async (req, res) => {
     try {
         const { id } = req.params;
         const { body } = req.body;
@@ -28,7 +49,7 @@ app.put("/posts/:id", async (req, res) => {
     }
 });
 // kustutab postituse
-app.delete("/posts/:id", async (req, res) => {
+app.delete("/posts/:id", authenticateToken, async (req, res) => {
     try {
         const { id } = req.params;
         const deletePost = await pool.query("DELETE FROM posts WHERE id = $1", [
@@ -40,7 +61,7 @@ app.delete("/posts/:id", async (req, res) => {
     }
 });
 // kustutab kõik postitused
-app.delete("/posts", async (req, res) => {
+app.delete("/posts", authenticateToken, async (req, res) => {
     try {
         await pool.query("DELETE FROM posts");
         res.json({ message: "All posts deleted successfully" });
@@ -49,7 +70,7 @@ app.delete("/posts", async (req, res) => {
     }
 });
 // saab kindla postituse id järgi
-app.get("/posts/:id", async (req, res) => {
+app.get("/posts/:id", authenticateToken, async (req, res) => {
     try {
         const { id } = req.params;
         const post = await pool.query("SELECT * FROM posts WHERE id = $1", [
@@ -64,7 +85,7 @@ app.get("/posts/:id", async (req, res) => {
     }
 });
 
-app.post("/posts", async (req, res) => {
+app.post("/posts", authenticateToken, async (req, res) => {
     const { body } = req.body;
     try {
         const newPost = await pool.query(
@@ -80,11 +101,43 @@ app.post("/posts", async (req, res) => {
 app.post("/users", async (req, res) => {
     const { email, password } = req.body;
     try {
+        const existing = await pool.query(
+            "SELECT * FROM users WHERE email = $1",
+            [email]
+        );
+        if (existing.rows.length > 0) {
+            return res.status(400).json({ message: "User already exists" });
+        }
+
         const newUser = await pool.query(
             "INSERT INTO users (email, password) VALUES ($1, $2) RETURNING *",
             [email, password]
         );
-        res.json(newUser.rows[0]);
+
+        const token = generateAccessToken({ email: newUser.rows[0].email });
+        res.json({ token });
+    } catch (err) {
+        console.error(err.message);
+    }
+});
+
+app.post("/login", async (req, res) => {
+    const { email, password } = req.body;
+    try {
+        const userRes = await pool.query(
+            "SELECT * FROM users WHERE email = $1",
+            [email]
+        );
+        if (userRes.rows.length === 0) {
+            return res.status(400).json({ message: "User not found" });
+        }
+        const user = userRes.rows[0];
+        if (user.password !== password) {
+            return res.status(401).json({ message: "Invalid credentials" });
+        }
+
+        const token = generateAccessToken({ email: user.email });
+        res.json({ token });
     } catch (err) {
         console.error(err.message);
     }

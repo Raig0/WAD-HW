@@ -89,16 +89,19 @@ export default {
 
             if (this.errors.length === 0) {
                 try {
-                    await axios.post("http://localhost:3000/users", {
+                    const res = await axios.post("http://localhost:3000/users", {
                         email: this.email,
                         password: this.password,
                     });
+                    const token = res.data.token;
+                    localStorage.setItem("token", token);
+                    axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
                     this.email = "";
                     this.password = "";
                     this.router.push("/");
                 } catch (err) {
                     console.error(err);
-                    this.errors.push("Error creating account");
+                    this.errors.push(err.response && err.response.data && err.response.data.message ? err.response.data.message : "Error creating account");
                 }
             }
         },

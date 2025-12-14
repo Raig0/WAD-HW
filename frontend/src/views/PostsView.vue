@@ -42,10 +42,13 @@ export default {
     },
     methods: {
         goToLogin() {
+            // logout
+            localStorage.removeItem("token");
+            delete axios.defaults.headers.common["Authorization"];
             this.router.push("/login");
         },
         goToAddPost() {
-            this.router.push("/addpost");
+            this.router.push("/addPost");
         },
         goToPost(id) {
             this.router.push(`/posts/${id}`);
@@ -70,8 +73,15 @@ export default {
         },
     },
     async created() {
-        const res = await axios.get("http://localhost:3000/posts");
-        this.posts = res.data;
+        try {
+            const res = await axios.get("http://localhost:3000/posts");
+            this.posts = res.data;
+        } catch (err) {
+            console.error(err);
+            if (err.response && (err.response.status === 401 || err.response.status === 403)) {
+                this.router.push('/login');
+            }
+        }
     },
 };
 </script>

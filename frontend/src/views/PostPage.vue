@@ -33,18 +33,39 @@ export default {
     methods: {
         async updatePost() {
             const postId = this.$route.params.id;
-            await axios.put(`http://localhost:3000/posts/${postId}`, this.post);
+            try {
+                await axios.put(`http://localhost:3000/posts/${postId}`, this.post);
+            } catch (err) {
+                console.error(err);
+                if (err.response && (err.response.status === 401 || err.response.status === 403)) {
+                    this.$router.push('/login');
+                }
+            }
         },
         async deletePost() {
             const postId = this.$route.params.id;
-            await axios.delete(`http://localhost:3000/posts/${postId}`);
-            this.$router.push("/");
+            try {
+                await axios.delete(`http://localhost:3000/posts/${postId}`);
+                this.$router.push("/");
+            } catch (err) {
+                console.error(err);
+                if (err.response && (err.response.status === 401 || err.response.status === 403)) {
+                    this.$router.push('/login');
+                }
+            }
         },
     },
     async created() {
         const postId = this.$route.params.id;
-        const res = await axios.get(`http://localhost:3000/posts/${postId}`);
-        this.post = res.data;
+        try {
+            const res = await axios.get(`http://localhost:3000/posts/${postId}`);
+            this.post = res.data;
+        } catch (err) {
+            console.error(err);
+            if (err.response && (err.response.status === 401 || err.response.status === 403)) {
+                this.$router.push('/login');
+            }
+        }
     },
 };
 </script>

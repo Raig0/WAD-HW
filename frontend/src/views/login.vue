@@ -48,7 +48,7 @@ export default {
         };
     },
     methods: {
-        validateForm() {
+        async validateForm() {
             this.errors = [];
 
             if(!this.email || !this.password) {
@@ -56,9 +56,22 @@ export default {
                 return;
             }
 
-            this.email = '';
-            this.password = '';
-            this.$router.push('/');
+            try {
+                const res = await (await import('axios')).default.post(
+                    "http://localhost:3000/login",
+                    { email: this.email, password: this.password }
+                );
+                const token = res.data.token;
+                localStorage.setItem("token", token);
+                const axios = (await import('axios')).default;
+                axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+                this.email = '';
+                this.password = '';
+                this.$router.push('/');
+            } catch (err) {
+                console.error(err);
+                this.errors.push(err.response && err.response.data && err.response.data.message ? err.response.data.message : 'Login failed');
+            }
         },
         goToSignup() {
             this.$router.push('/signup');
