@@ -51,7 +51,6 @@ export default {
     },
     async created() {
         const res = await axios.get("http://localhost:3000/posts");
-        console.log(res.data);
         this.posts = res.data;
     },
 };
