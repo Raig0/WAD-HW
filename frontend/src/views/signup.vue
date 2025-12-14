@@ -23,7 +23,9 @@
 
             <div v-if="errors.length" class="error">
                 <ul>
-                    <li v-for="(error, index) in errors" :key="index">{{ error }}</li>
+                    <li v-for="(error, index) in errors" :key="index">
+                        {{ error }}
+                    </li>
                 </ul>
             </div>
 
@@ -35,14 +37,21 @@
 </template>
 
 <script>
+import axios from "axios";
+import { useRouter } from "vue-router";
+
 export default {
-    name: 'Signup',
+    name: "Signup",
     data() {
         return {
-            email: '',
-            password: '',
-            errors: []
+            email: "",
+            password: "",
+            errors: [],
         };
+    },
+    setup() {
+        const router = useRouter();
+        return { router };
     },
     methods: {
         checkPassword(password) {
@@ -52,37 +61,52 @@ export default {
                 this.errors.push("Password must be 8-14 characters long.");
             }
             if (!/[A-Z]/.test(password)) {
-                this.errors.push("Password must contain at least one uppercase alphabet character.");
+                this.errors.push(
+                    "Password must contain at least one uppercase alphabet character."
+                );
             }
             if ((password.match(/[a-z]/g) || []).length < 2) {
-                this.errors.push("Password must contain at least two lowercase alphabet characters.");
+                this.errors.push(
+                    "Password must contain at least two lowercase alphabet characters."
+                );
             }
             if (!/[0-9]/.test(password)) {
-                this.errors.push("Password must contain at least one numeric value.");
+                this.errors.push(
+                    "Password must contain at least one numeric value."
+                );
             }
             if (!/^[A-Z]/.test(password)) {
-                this.errors.push("Password must start with an uppercase letter.");
+                this.errors.push(
+                    "Password must start with an uppercase letter."
+                );
             }
             if (!/_/.test(password)) {
                 this.errors.push("Password must contain character _");
             }
         },
-        validateForm() {
-            
+        async validateForm() {
             this.checkPassword(this.password);
 
             if (this.errors.length === 0) {
-                this.email = '';
-                this.password = '';
-                this.$router.push('/');
+                try {
+                    await axios.post("http://localhost:3000/users", {
+                        email: this.email,
+                        password: this.password,
+                    });
+                    this.email = "";
+                    this.password = "";
+                    this.router.push("/");
+                } catch (err) {
+                    console.error(err);
+                    this.errors.push("Error creating account");
+                }
             }
-        }
-    }
+        },
+    },
 };
 </script>
 
 <style scoped>
-
 .error {
     color: red;
     margin-top: 1em;
