@@ -7,7 +7,7 @@
         <main class="content" v-else>
             <PostComponent
                 @click="goToPost(post.id)"
-                v-for="post in posts"
+                v-for="post in sortedPosts"
                 :key="post.id"
                 :post="post"
                 class="post">
@@ -15,7 +15,9 @@
         </main>
         <div class="actions-wrapper">
             <button class="add-btn" @click="goToAddPost">Add post</button>
-            <button class="delete-btn">Delete all</button>
+            <button class="delete-btn" @click="deleteAllPosts">
+                Delete all
+            </button>
         </div>
     </div>
 </template>
@@ -47,6 +49,24 @@ export default {
         },
         goToPost(id) {
             this.router.push(`/posts/${id}`);
+        },
+        async deleteAllPosts() {
+            if (confirm("Oled kindel, et tahad kõik postitused kustutada?")) {
+                try {
+                    await axios.delete("http://localhost:3000/posts");
+                    this.posts = [];
+                } catch (err) {
+                    console.error(err);
+                    alert("Error deleting posts");
+                }
+            }
+        },
+    },
+    computed: {
+        sortedPosts() {
+            return [...this.posts].sort(
+                (a, b) => new Date(b.date) - new Date(a.date)
+            );
         },
     },
     async created() {

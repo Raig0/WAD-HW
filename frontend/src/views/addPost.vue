@@ -1,21 +1,53 @@
 <template>
     <div id="addpost">
-        <form class="form" action="">
+        <form class="form" @submit.prevent="createPost">
             <div class="formpostbody">
                 <p>Post body</p>
                 <textarea
-                    name=""
                     id="postbody"
+                    v-model="postBody"
                     placeholder="textarea"></textarea>
             </div>
-            <div class="formpostbody">
-                <p>Select file</p>
-                <a type="file" id="choosefile">Choose file</a>
-            </div>
-            <a id="createpost" href="index.html" submit>Create post</a>
+
+            <button id="createpost" type="submit">Create post</button>
         </form>
     </div>
 </template>
+
+<script>
+import axios from "axios";
+import { useRouter } from "vue-router";
+
+export default {
+    name: "addPost",
+    data() {
+        return {
+            postBody: "",
+        };
+    },
+    setup() {
+        const router = useRouter();
+        return { router };
+    },
+    methods: {
+        async createPost() {
+            if (!this.postBody.trim()) {
+                alert("Post body cannot be empty");
+                return;
+            }
+            try {
+                await axios.post("http://localhost:3000/posts", {
+                    body: this.postBody,
+                });
+                this.router.push("/");
+            } catch (err) {
+                console.error(err);
+                alert("Error creating post");
+            }
+        },
+    },
+};
+</script>
 
 <style scoped>
 #addpost {
@@ -68,6 +100,7 @@
     background-color: #94a3b8;
 }
 #addpost #createpost {
+    border-radius: 1rem;
     cursor: pointer;
     background-color: #6366f1;
 }
@@ -78,5 +111,4 @@
 #addpost #createpost:hover {
     background-color: #4f46e5; /* hover efekt */
 }
-
 </style>

@@ -39,6 +39,15 @@ app.delete("/posts/:id", async (req, res) => {
         console.error(err.message);
     }
 });
+// kustutab kõik postitused
+app.delete("/posts", async (req, res) => {
+    try {
+        await pool.query("DELETE FROM posts");
+        res.json({ message: "All posts deleted successfully" });
+    } catch (err) {
+        console.error(err.message);
+    }
+});
 // saab kindla postituse id järgi
 app.get("/posts/:id", async (req, res) => {
     try {
