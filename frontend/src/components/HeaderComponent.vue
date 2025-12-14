@@ -3,6 +3,7 @@
         <ul class="nav">
             <li><RouterLink to="/">Home</RouterLink></li>
             <li><RouterLink to="/login">Login</RouterLink></li>
+            <li><RouterLink to="/contact">Contact</RouterLink></li>
 
             <li class="nav-img">
                 <a @click="toggleMenu">
@@ -26,7 +27,6 @@
 </template>
 
 <style scoped>
-
 .header {
     width: 100%;
     background-color: rgba(246, 244, 251, 1);
@@ -106,7 +106,6 @@
 .nav-img a:hover {
     background-color: transparent;
 }
-
 </style>
 
 <script>
