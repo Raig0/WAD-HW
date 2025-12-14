@@ -9,7 +9,47 @@ app.get("/posts", async (req, res) => {
     try {
         const posts = await pool.query("SELECT * FROM posts");
         res.json(posts.rows);
-        console.log(posts.rows);
+    } catch (err) {
+        console.error(err.message);
+    }
+});
+// updateb postitust
+app.put("/posts/:id", async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { body } = req.body;
+        const updatePost = await pool.query(
+            "UPDATE posts SET body = $1 WHERE id = $2 RETURNING *",
+            [body, id]
+        );
+        res.json(updatePost.rows[0]);
+    } catch (err) {
+        console.error(err.message);
+    }
+});
+// kustutab postituse
+app.delete("/posts/:id", async (req, res) => {
+    try {
+        const { id } = req.params;
+        const deletePost = await pool.query("DELETE FROM posts WHERE id = $1", [
+            id,
+        ]);
+        res.json({ message: "Post deleted successfully" });
+    } catch (err) {
+        console.error(err.message);
+    }
+});
+// saab kindla postituse id järgi
+app.get("/posts/:id", async (req, res) => {
+    try {
+        const { id } = req.params;
+        const post = await pool.query("SELECT * FROM posts WHERE id = $1", [
+            id,
+        ]);
+        if (post.rows.length === 0) {
+            return res.status(404).json({ message: "Post not found" });
+        }
+        res.json(post.rows[0]);
     } catch (err) {
         console.error(err.message);
     }

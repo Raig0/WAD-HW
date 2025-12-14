@@ -5,6 +5,7 @@ const routes = [
     { path: "/addPost", component: () => import("../views/addPost.vue") },
     { path: "/signup", component: () => import("../views/signup.vue") },
     { path: "/login", component: () => import("../views/login.vue") },
+    { path: "/posts/:id", component: () => import("../views/PostPage.vue") },
 ];
 
 const router = createRouter({

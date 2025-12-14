@@ -6,6 +6,7 @@
         <main class="content" v-if="posts.length === 0">Postitusi pole</main>
         <main class="content" v-else>
             <PostComponent
+                @click="goToPost(post.id)"
                 v-for="post in posts"
                 :key="post.id"
                 :post="post"
@@ -20,6 +21,7 @@
 </template>
 
 <script>
+import { useRouter } from "vue-router";
 import PostComponent from "../components/PostComponent.vue";
 
 import axios from "axios";
@@ -32,9 +34,23 @@ export default {
             posts: [],
         };
     },
+    setup() {
+        const router = useRouter();
+        return { router };
+    },
+    methods: {
+        goToLogin() {
+            this.router.push("/login");
+        },
+        goToAddPost() {
+            this.router.push("/addpost");
+        },
+        goToPost(id) {
+            this.router.push(`/posts/${id}`);
+        },
+    },
     async created() {
         const res = await axios.get("http://localhost:3000/posts");
-        console.log(res.data);
         this.posts = res.data;
     },
 };

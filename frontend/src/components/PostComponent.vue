@@ -1,5 +1,5 @@
 <template>
-    <div class="post">
+    <div class="post" style="cursor: pointer">
         <div class="post-header">
             <time :datetime="post.date" class="meta">
                 {{
