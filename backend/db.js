@@ -21,6 +21,7 @@ pool.connect((err, client, release) => {
 });
 
 pool.query(
+    // DROP TABLE IF EXISTS posts;
     `
     CREATE TABLE IF NOT EXISTS users (
         id SERIAL PRIMARY KEY,

@@ -1,11 +1,10 @@
 <template>
     <div>
         <div class="logout-wrapper">
-            <button class="logout-btn" @click="goToLogin">
-                Logout
-            </button>
+            <button class="logout-btn" @click="goToLogin">Logout</button>
         </div>
-        <main class="content">
+        <main class="content" v-if="posts.length === 0">Postitusi pole</main>
+        <main class="content" v-else>
             <PostComponent
                 v-for="post in posts"
                 :key="post.id"
@@ -14,9 +13,7 @@
             </PostComponent>
         </main>
         <div class="actions-wrapper">
-            <button class="add-btn" @click="goToAddPost">
-                Add post
-            </button>
+            <button class="add-btn" @click="goToAddPost">Add post</button>
             <button class="delete-btn">Delete all</button>
         </div>
     </div>
@@ -25,24 +22,20 @@
 <script>
 import PostComponent from "../components/PostComponent.vue";
 
+import axios from "axios";
+
 export default {
     name: "PostsView",
     components: { PostComponent },
-    computed: {
-        posts() {
-            return this.$store.state.posts;
-        },
-    },
-    methods: {
-        goToLogin() {
-            this.$router.push('/login');
-        },
-        goToAddPost() {
-            this.$router.push('/addPost');
-        }
+    data() {
+        return {
+            posts: [],
+        };
     },
     async created() {
-        await this.$store.dispatch("fetchPosts");
+        const res = await axios.get("http://localhost:3000/posts");
+        console.log(res.data);
+        this.posts = res.data;
     },
 };
 </script>
@@ -61,7 +54,7 @@ export default {
     padding: 1em 2em;
 }
 
-.logout-btn{
+.logout-btn {
     background-color: rgb(97, 97, 250);
     color: white;
     border: none;
@@ -70,7 +63,7 @@ export default {
     cursor: pointer;
     width: 100px;
     height: 3em;
-    font-family: 'Arial', sans-serif;
+    font-family: "Arial", sans-serif;
 }
 .logout-btn:hover {
     background-color: rgb(72, 72, 220);
@@ -84,7 +77,8 @@ export default {
     margin: 0 auto;
 }
 
-.add-btn, .delete-btn {
+.add-btn,
+.delete-btn {
     background-color: rgb(97, 97, 250);
     color: white;
     border: none;
@@ -93,9 +87,10 @@ export default {
     cursor: pointer;
     width: 120px;
     height: 3em;
-    font-family: 'Arial', sans-serif;
+    font-family: "Arial", sans-serif;
 }
-.add-btn:hover, .delete-btn:hover {
+.add-btn:hover,
+.delete-btn:hover {
     background-color: rgb(72, 72, 220);
 }
 </style>

@@ -1,29 +1,21 @@
 <template>
-    
     <div class="post">
-    <div class="post-header">
-        <img
-            :src="post.avatar"
-            class="user-icon"
-            alt=""
-            v-if="post.avatar" />
-            <time :datetime="post.created_at" class="meta">
-                {{new Date(post.created_at).toLocaleDateString("en-US", {
-                    month: "short",
-                    day: "numeric",
-                    year: "numeric",
-                    hour: "2-digit",
-                    minute: "2-digit",
-                })}} by <p class="author">{{ post.author }}</p> </time>
+        <div class="post-header">
+            <time :datetime="post.date" class="meta">
+                {{
+                    new Date(post.date).toLocaleDateString("en-US", {
+                        month: "short",
+                        day: "numeric",
+                        year: "numeric",
+                        hour: "2-digit",
+                        minute: "2-digit",
+                    })
+                }}
+            </time>
         </div>
-            <img class="post-img":src="post.image" alt="Post image" v-if="post.image" />
-            <p>{{ post.content }}</p>
 
-            <button class="like-btn" @click="likePost(post.id)">
-                {{ post.likes }} likes
-            </button>
-        </div>
-        
+        <p>{{ post.body }}</p>
+    </div>
 </template>
 
 <script>
@@ -34,12 +26,10 @@ export default {
     },
     methods: {
         likePost(id) {
-            this.$store.commit('incrementLikes', id);
+            this.$store.commit("incrementLikes", id);
         },
     },
 };
-
-
 </script>
 
 <style scoped>
@@ -108,7 +98,7 @@ export default {
     margin-top: 1em;
 }
 
-.meta{
+.meta {
     display: flex;
     flex-direction: row;
     align-items: center;
